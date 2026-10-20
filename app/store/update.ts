@@ -6,10 +6,9 @@ import {
 } from "../constant";
 import { getClientConfig } from "../config/client";
 import { createPersistStore } from "../utils/store";
-import ChatGptIcon from "../icons/chatgpt.png";
+import { clientUpdate } from "../utils";
+import NextChatIcon from "../icons/nextchat-bot.png";
 import Locale from "../locales";
-import { use } from "react";
-import { useAppConfig } from ".";
 import { ClientApi } from "../client/api";
 
 const ONE_MINUTE = 60 * 1000;
@@ -108,7 +107,7 @@ export const useUpdateStore = createPersistStore(
                         window.__TAURI__?.notification.sendNotification({
                           title: "NextChat",
                           body: `${Locale.Settings.Update.IsLatest}`,
-                          icon: `${ChatGptIcon.src}`,
+                          icon: `${NextChatIcon.src}`,
                           sound: "Default",
                         });
                       } else {
@@ -118,9 +117,10 @@ export const useUpdateStore = createPersistStore(
                         window.__TAURI__?.notification.sendNotification({
                           title: "NextChat",
                           body: updateMessage,
-                          icon: `${ChatGptIcon.src}`,
+                          icon: `${NextChatIcon.src}`,
                           sound: "Default",
                         });
+                        clientUpdate();
                       }
                     }
                   });
